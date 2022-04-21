@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-around align-items-center">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#statusModal">Show Statuses</button>
+    <h2 class="text-center m-4">Manage your Todos!</h2>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#flagModal">Show Flags</button>
+</div>
+<app-todo-add (newTodoEvent)="addNew($event)"></app-todo-add>
+<app-todo-list [todoList]="todoList$" (editTodoEvent)="edit($event)" (deleteTodoEvent)="deleteOne($event)">
+</app-todo-list>
+<app-todo-edit (EditTodoIdEvent)="updateTodoId($event)" (EditTodoEvent)="updateTodo($event)" [todo]="editTodo">
+</app-todo-edit>
+<app-flag-list (updateFlagsEvent)="updateFlagOrStatus($event)"></app-flag-list>
+<app-status-list (updateStatusesEvent)="updateFlagOrStatus($event)"></app-status-list>

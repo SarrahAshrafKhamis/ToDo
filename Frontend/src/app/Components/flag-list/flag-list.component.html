@@ -1,0 +1,68 @@
+<div class="modal fade" id="flagModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addEditModalLabel">Flags</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Color</th>
+                        <th>Operations</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let flag of flagList$|async">
+                            <td>{{flag.id}}</td>
+                            <td>
+                                <input type="text" disabled [(ngModel)]="flag.name" #name />
+                            </td>
+                            <td>
+                                <select class="form-control" disabled [(ngModel)]="flag.color" #color>
+                                    <option *ngFor="let color of colors" [selected]="flag.color==color">
+                                        {{color}}
+                                    </option>
+                                </select>
+                            </td>
+                            <td>
+                                <button #editBtn (click)="edit(name,color, editBtn, saveBtn)"
+                                    class="btn btn-outline-warning" style="border-radius: 35px;">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button #saveBtn (click)="save(flag,name,color, editBtn, saveBtn)"
+                                    class="btn btn-outline-primary" style="border-radius: 35px; display: none;">
+                                    <i class="fa-solid fa-check"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="text" [(ngModel)]="newFlag.name" />
+                            </td>
+                            <td>
+                                <select class="form-control" [(ngModel)]="newFlag.color">
+                                    <option *ngFor="let color of colors">
+                                        {{color}}
+                                    </option>
+                                </select>
+                            </td>
+                            <td>
+                                <button (click)="addNewFlag()" class="btn btn-outline-success"
+                                    style="border-radius: 35px;">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="notifyTodoList()">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

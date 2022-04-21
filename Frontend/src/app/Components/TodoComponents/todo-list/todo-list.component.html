@@ -1,0 +1,28 @@
+<table class="table table-striped">
+    <thead>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Flag</th>
+        <th>Comments</th>
+        <th>Operations</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let todo of todoList$|async">
+            <td>{{todo.id}}</td>
+            <td>{{todo.title}}</td>
+            <td>
+                <span [class]="mapColorToBadgeClass(todo.status.color)">{{todo.status.name}}</span>
+            </td>
+            <td>
+                <span [class]="mapColorToBadgeClass(todo.flag.color)">{{todo.flag.name}}</span>
+            </td>
+            <td>{{todo.comments}}</td>
+            <td>
+                <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editModal"
+                    (click)="editTodo(todo.id)">Edit</button>
+                <button (click)="deleteTodo(todo.id)" class="btn btn-outline-danger">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
